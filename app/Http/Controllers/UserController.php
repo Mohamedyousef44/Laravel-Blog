@@ -13,6 +13,7 @@ class UserController extends Controller
 
         $userId = Auth::id();
         $data = User::find($userId);
+        dd($data->getMedia('images'));
         return view('user.show' , ['user' => $data]);
     }
     public function edit($id){
@@ -24,8 +25,23 @@ class UserController extends Controller
     public function update( UpdateUserController $request , $id){
 
         $user= User::find($id);
-        dd($request->all());
+        $data = $request->all();
+        
+        if($request->hasFile('image')){
+
+            $user->addMedia($request->image)->toMediaCollection('images' , 'media');
+
+        }
+            
+        if($request->password != '********'){
+            
+            $user->password = $data["password"];
+        };
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->save();
          
-        return redirect()->route('user.edit' ,['user' => $user]);
+        return redirect()->route('users.show' ,['user' => $user]);
     }
 }
