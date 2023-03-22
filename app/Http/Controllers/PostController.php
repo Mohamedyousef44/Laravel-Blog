@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Redirect;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
+/**
+ * Summary of PostController
+ */
 class PostController extends Controller
 {
     function index(){
-        
+
         $posts = Post::paginate(9);
         return view('post.index' , ['posts' =>$posts]);
     }
@@ -37,34 +41,61 @@ class PostController extends Controller
     function create(){
 
         $users = User::all();
-        return redirect()->route('posts.index');
+        return view('post.create', ['users' => $users]);
+
     }
     function edit($id){
+
         $post = Post::find($id);
         return view('post.edit' , ['post'=>$post]);
+
     }
-    function update($id , Request $request){
+
+    function update($id , StorePostRequest $request){
 
         $data = $request->all();
         $userId = User::where('name' , $data['AuthorId'])->first()->id;
-
         $post = Post::find($id);
+
+        //check if user upload or not
+
+        // dd($post->image); // http://127.0.0.1:8000/storage/images/06HzVj5JZn5CaFQp6ttKjptvMijlHlSzEuvv9LoD.jpg
+
+        if(isset($data['image'])){
+
+            $check = Storage::disk('public')->delete($post->image);
+            $file = $request->file('image');
+            $path = $file->store('images' , ['disk'=>'public']);
+            $post->image = $path;
+
+        }
+
         $post->title = $data["title"];
         $post->description = $data["description"];
         $post->content = $data["content"];
         $post->user_id = $userId;
         $post->save();
+
         return redirect()->route('posts.index');
     }
-    function store(Request $request){
+    function store(StorePostRequest $request){
 
         $data = $request->all();
+        $path = "";
+        // dd($data);
+
+        if(isset($data['image'])){
+
+            $file = $request->file('image');
+            $path = $file->store('images' , ['disk'=>'public']);
+        }
 
         Post::create([
 
             "title"=>$data['title'],
             "description"=>$data['description'],
             "content"=>$data['content'],
+            "image"=>$path,
             "user_id"=>$data['AuthorId'],
             
         ]);
@@ -75,9 +106,16 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        dd($id , $post );
         $post->delete();
- 
+        Storage::disk('public')->delete($post->image);
         return redirect()->route('posts.index'); 
     }
+    public function search(Request $request)
+    {
+       
+        dd($request->all());
+        return redirect()->route('posts.index'); 
+    }
+
+
 }

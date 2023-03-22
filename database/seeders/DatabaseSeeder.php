@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // \App\Models\User::factory()
-        //     ->count(100)
-        //     ->create();
-        // \App\Models\Post::factory()
-        //     ->count(400)
-        //     ->create();
+        \App\Models\User::factory()
+            ->count(100)
+            ->create();
+        \App\Models\Post::factory()
+            ->count(400)
+            ->create();
         \App\Models\Comment::factory()
             ->count(50)
             ->create();

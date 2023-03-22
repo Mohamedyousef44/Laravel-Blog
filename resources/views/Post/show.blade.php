@@ -14,6 +14,9 @@
             <p class="card-text">{{strtoupper($post->content)}}</p>
             <a href="{{route('posts.index')}}" class="btn btn-primary">Home</a>
         </div>
+        <div class="w-50 h-50">
+            <img src="{{$post->image}}" alt="it is an image" >
+        </div>
     </div>
     <div class="card my-3">
         <h5 class="card-header">Writer Info</h5>

@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         return [
 
-            'title' => fake()->sentence(),
+            'title' => fake()->unique()->sentence(),
             'description' => fake()->paragraph(),
             'content' => fake()->sentence(),
             'user_id'=> function(){

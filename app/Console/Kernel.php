@@ -2,9 +2,10 @@
 
 namespace App\Console;
 
+use App\Jobs\PruneOldPostsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use App\Jobs\PruneOldPostsJob as deleteOld;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -12,7 +13,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        
+        // $schedule->job(new PruneOldPostsJob())->daily();
+
+        $schedule->call(function () {
+
+            deleteOld::dispatch();
+            
+        })->daily();
+
+        $schedule->command('make:work')->daily();
     }
 
     /**
