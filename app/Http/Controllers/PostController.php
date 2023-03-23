@@ -22,6 +22,7 @@ class PostController extends Controller
     function show($id){
 
         $post = Post::find($id);
+        // dd();
         $users = User::all();
         $comments = Comment::where('post_id' , $post->id)->get();
         return view('post.show' , ['post'=>$post , 'comments'=>$comments , 'users'=>$users]);
@@ -110,12 +111,5 @@ class PostController extends Controller
         Storage::disk('public')->delete($post->image);
         return redirect()->route('posts.index'); 
     }
-    public function search(Request $request)
-    {
-       
-        dd($request->all());
-        return redirect()->route('posts.index'); 
-    }
-
-
+  
 }

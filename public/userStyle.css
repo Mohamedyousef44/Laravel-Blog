@@ -102,3 +102,10 @@ section {
 .rounded {
     border-radius: 0.25rem!important;
 }
+
+.cus-img{
+
+    width: 60%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}

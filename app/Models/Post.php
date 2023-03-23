@@ -49,4 +49,10 @@ class Post extends Model
             get: fn ($value) => asset('storage/'.$value),
         );
     }  
+    protected function created_at(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value->format('Y - m - d'),
+        );
+    }  
 }

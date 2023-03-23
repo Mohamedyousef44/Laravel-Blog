@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('posts', PostController::class)->middleware(['auth']);
 Route::post('/posts/{post}/comment', [PostController::class , 'comment'])->name('posts.comment');
-Route::post('/posts/{post}/search', [PostController::class , 'search'])->name('posts.search');
 
-Route::get('/users' , [UserController::class , 'show'])->name('users.show');
-Route::get('/users/{user}' , [UserController::class , 'edit'])->name('users.edit');
+Route::get('/users' , [UserController::class , 'index'])->name('users.index');
+Route::get('/users/{user}' , [UserController::class , 'show'])->name('users.show');
+Route::get('/users/{user}/edit' , [UserController::class , 'edit'])->name('users.edit');
 Route::put('/users/{user}' , [UserController::class , 'update'])->name('users.update');
+
 
 Auth::routes();
 

@@ -34,8 +34,8 @@
                 @enderror
             </div>
 
-            <div>
-                <img src="{{$user->image}}">
+            <div class="w-50">
+                <img src="{{$user->getMedia('images')->last()->getUrl()}}" class="cus-img">
             </div>
 
             <div class="input-group mb-3">

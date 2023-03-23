@@ -22,7 +22,7 @@
         <h5 class="card-header">Writer Info</h5>
         <div class="card-body">
             <h5 class="card-title text-danger mb-4">{{strtoupper($post->user()->where('id' , $post->user_id)->first()->name)}}</h5>
-            <img src="/pp.png" class="w-25 h-25">
+            <a href="{{}}">About</a>
         </div>
     </div>
 

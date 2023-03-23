@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function show(Request $request){
+    public function index(Request $request){
 
+        // dd($request->cookie());
         $userId = Auth::id();
         $data = User::find($userId);
-        dd($data->getMedia('images'));
-        return view('user.show' , ['user' => $data]);
+        $media = $data->getMedia('images');
+        // $idx = $idx == 0 ? count($media)-1 : $idx;
+        return view('user.index' , ['user' => $data , 'photos' => $media]);
     }
     public function edit($id){
 
@@ -42,6 +44,15 @@ class UserController extends Controller
         $user->email = $data['email'];
         $user->save();
          
-        return redirect()->route('users.show' ,['user' => $user]);
+        return redirect()->route('users.index' );
+    }
+
+    public function show($id){
+
+        $user= User::find($id);
+
+        $photos = $user->getMedia('images');
+         
+        return view('user.show' , ['photos' => $photos]);
     }
 }

@@ -42,7 +42,8 @@
 
                     </ul>
 
-                    <form class="d-flex" role="search" action="{{route('posts.search' , 'value')}}" method="POST">
+                    <form class="d-flex" role="search" action="" method="POST">
+                        @csrf
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -85,7 +86,7 @@
                     </ul>
 
                     <div>
-                        <a href="{{route('users.show')}}"><i class="bi bi-person-fill fs-4"></i></a>
+                        <a href="{{route('users.index')}}"><i class="bi bi-person-fill fs-4"></i></a>
                     </div>
                     
                 </div>
