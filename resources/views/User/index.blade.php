@@ -14,7 +14,15 @@
                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                         <div class="row align-items-center">
                             <div class="col-lg-6 mb-4 mb-lg-0 d-flex flex-column justify-content-between ">
-                                <img src="{{$photos->last()->getUrl()}}" alt="my profile image" class="cus-img">
+                                @if(count($photos) == 0)
+
+                                    <img src="/pp.png" alt="my profile image" class="cus-img">
+                                
+                                @else
+
+                                    <img src="{{$photos->last()->getUrl()}}" alt="my profile image" class="cus-img">
+                                
+                                @endif
                                 <a href="{{route('users.show' , $user->id)}}" class="text-center w-50 fs-3 text-decoration-none text-dark"><i class="bi bi-images"></i> Gallery</a>
                             </div>
                             <div class="col-lg-6 px-xl-10">

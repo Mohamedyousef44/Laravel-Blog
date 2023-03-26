@@ -33,6 +33,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+          
 
             <div>
                 <img src="{{$post->image}}">

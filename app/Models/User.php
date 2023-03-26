@@ -14,8 +14,6 @@ use Spatie\MediaLibrary\HasMedia;
 
 
 
-
-
 class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable , InteractsWithMedia;
@@ -26,6 +24,10 @@ class User extends Authenticatable implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
+        'github_id',
+        'github_token',
+        'google_id',
+        'google_token',
         'name',
         'email',
         'password',

@@ -22,7 +22,7 @@ class PostController extends Controller
     function show($id){
 
         $post = Post::find($id);
-        // dd();
+        // dd($post->tags[0]->name);
         $users = User::all();
         $comments = Comment::where('post_id' , $post->id)->get();
         return view('post.show' , ['post'=>$post , 'comments'=>$comments , 'users'=>$users]);
@@ -52,9 +52,10 @@ class PostController extends Controller
 
     }
 
-    function update($id , StorePostRequest $request){
+    function update($id , UpdatePostRequest $request){
 
         $data = $request->all();
+        // $tags = explode(',' , $tags); 
         $userId = User::where('name' , $data['AuthorId'])->first()->id;
         $post = Post::find($id);
 
@@ -75,6 +76,7 @@ class PostController extends Controller
         $post->description = $data["description"];
         $post->content = $data["content"];
         $post->user_id = $userId;
+        // $post->syncTags($tags);
         $post->save();
 
         return redirect()->route('posts.index');
@@ -84,6 +86,9 @@ class PostController extends Controller
         $data = $request->all();
         $path = "";
         // dd($data);
+        $tags = $data['Tags'];
+        $tags = explode(',' , $tags);
+        // dd($tags);
 
         if(isset($data['image'])){
 
@@ -91,15 +96,18 @@ class PostController extends Controller
             $path = $file->store('images' , ['disk'=>'public']);
         }
 
-        Post::create([
+        $post = Post::create([
 
             "title"=>$data['title'],
             "description"=>$data['description'],
             "content"=>$data['content'],
             "image"=>$path,
+            "tags"=>$tags,
             "user_id"=>$data['AuthorId'],
             
         ]);
+
+        $post->syncTags($tags);
         
         return redirect()->route('posts.index');
     }

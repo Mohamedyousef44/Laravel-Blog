@@ -63,6 +63,11 @@
                                     </a>
                                 @endif
                             </div>
+                            <div class="col-md-8 offset-md-4 mt-4">
+                                <p>Login with</p>
+                                <a href="http://127.0.0.1:8000/auth/redirect/github" class="btn btn-dark">Github</a>
+                                <a href="http://127.0.0.1:8000/auth/redirect/google" class="btn btn-dark">Google</a>
+                            </div>
                         </div>
                     </form>
                 </div>

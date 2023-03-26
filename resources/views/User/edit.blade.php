@@ -35,7 +35,17 @@
             </div>
 
             <div class="w-50">
+
+                @if(count($user->getMedia('images')) == 0)
+
+                <img src="/pp.png" alt="my profile image" class="cus-img">
+
+                @else
+
                 <img src="{{$user->getMedia('images')->last()->getUrl()}}" class="cus-img">
+
+                @endif
+                
             </div>
 
             <div class="input-group mb-3">

@@ -17,12 +17,19 @@
         <div class="w-50 h-50">
             <img src="{{$post->image}}" alt="it is an image" >
         </div>
+        <h4 class="px-3 text-danger">Tags</h4>
+        <div class="d-flex justify-content-evenly align-items-center w-25">
+            
+            @foreach($post->tags as $tag)
+            <p class="bg-dark text-light">{{$tag->name}}</p>
+            @endforeach
+        </div>
     </div>
     <div class="card my-3">
         <h5 class="card-header">Writer Info</h5>
         <div class="card-body">
             <h5 class="card-title text-danger mb-4">{{strtoupper($post->user()->where('id' , $post->user_id)->first()->name)}}</h5>
-            <a href="{{}}">About</a>
+            <a href="">About</a>
         </div>
     </div>
 

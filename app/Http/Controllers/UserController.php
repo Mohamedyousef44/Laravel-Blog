@@ -15,6 +15,7 @@ class UserController extends Controller
         $userId = Auth::id();
         $data = User::find($userId);
         $media = $data->getMedia('images');
+        
         // $idx = $idx == 0 ? count($media)-1 : $idx;
         return view('user.index' , ['user' => $data , 'photos' => $media]);
     }
