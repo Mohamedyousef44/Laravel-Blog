@@ -15,7 +15,7 @@
             <a href="{{route('posts.index')}}" class="btn btn-primary">Home</a>
         </div>
         <div class="w-50 h-50">
-            <img src="{{$post->image}}" alt="it is an image" >
+            <img src="{{$post->image}}" alt="it is an image" class="w-75 h-75" >
         </div>
         <h4 class="px-3 text-danger">Tags</h4>
         <div class="d-flex justify-content-evenly align-items-center w-25">

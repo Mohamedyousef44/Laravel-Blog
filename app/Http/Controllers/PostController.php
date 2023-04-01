@@ -22,7 +22,6 @@ class PostController extends Controller
     function show($id){
 
         $post = Post::find($id);
-        // dd($post->tags[0]->name);
         $users = User::all();
         $comments = Comment::where('post_id' , $post->id)->get();
         return view('post.show' , ['post'=>$post , 'comments'=>$comments , 'users'=>$users]);

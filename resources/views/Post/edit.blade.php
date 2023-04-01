@@ -35,8 +35,8 @@
             </div>
           
 
-            <div>
-                <img src="{{$post->image}}">
+            <div class="w-50 h-50">
+                <img src="{{$post->image}}" class="w-75 h-75">
             </div>
 
             <div class="input-group mb-3">

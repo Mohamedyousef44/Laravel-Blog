@@ -68,6 +68,7 @@
     </div>
 
 <script>
+
     let deleteBtns = document.querySelectorAll('.deletePost');
     deleteBtns.forEach(button=>{
         button.addEventListener('click' , (event)=>{
@@ -79,9 +80,6 @@
         })
     })
 </script>
-
-
-   
 
 @endsection
 
