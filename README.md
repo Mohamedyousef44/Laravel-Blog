@@ -1,3 +1,9 @@
+# Demo
+
+
+https://user-images.githubusercontent.com/122277647/229272690-e9ca9bfc-a6ae-49dd-82c7-e837bf7d0ef6.mp4
+
+
 # Description
 
 This is a simple blog posts project built with Laravel. It allows users to make CRUD operation on posts beside each user has profile page to edit his info.
